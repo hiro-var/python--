@@ -2,7 +2,7 @@ import os
 import datetime as dt
 import pandas as pd
 import yfinance as yf
-import matplotlib as mp
+import matplotlib.pyplot as plt
 stock_code="7203"
 stock_code_dr=stock_code + ".T"
 first='2023-09-01'

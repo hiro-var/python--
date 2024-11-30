@@ -97,21 +97,39 @@ print(f'{type(STOCK_dividends)=}\n{STOCK_dividends}')
 STOCK_dividends.to_csv(STOCK_info['underlyingSymbol']+"_配当.csv")
 
 # 最大期間取得
-STOCK_download = yf.download(tickers="7203", period="max")
+STOCK_download = yf.download(tickers="7203.T", period="max")
 print(STOCK_download)
 
 
 # 1分足
-STOCK_download = yf.download(tickers="7203", period="1d",interval="1m")
+STOCK_download = yf.download(tickers="7203.T", period="1d",interval="1m")
 print(STOCK_download)
 
 
 # 日付指定
-STOCK_download = yf.download(tickers="7203", start="first", end="last")
+STOCK_download = yf.download(tickers="7203.T", start="first", end="last")
 print(STOCK_download)
 
 
 # トヨタの株価データ(history)
-STOCK = yf.Ticker("7203") 
+STOCK = yf.Ticker("7203.T") 
 STOCK_history = STOCK.history(period="max", interval="3mo")
 print(STOCK_history)
+
+# 米(ドル) / 日本(円)
+STOCK_download = yf.download(tickers="USDJPY=X", period="max", interval="1mo")
+print(STOCK_download)
+
+# 欧州(ユーロ) / 日本(円)
+STOCK = yf.Ticker("EURJPY=X") 
+# .info取得
+STOCK_info = STOCK.info
+
+# シンボル
+print(f"{STOCK_info['underlyingSymbol']=}")
+# ask/bid
+print(f"買気配{STOCK_info['bid']=}円 売気配{STOCK_info['ask']=}円 ")
+
+# 日経225
+STOCK_download = yf.download(tickers="^N225", period="max", interval="1mo")
+print(STOCK_download)

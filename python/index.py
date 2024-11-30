@@ -5,7 +5,7 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 stock_code="7203"
 stock_code_dr=stock_code + ".T"
-first='2023-09-01'
+first='2000-01-01'
 last = dt.date.today()
 df = yf.download(stock_code_dr, start=first, end=last)
 df.to_csv('stockdata_yahoo.csv') 
@@ -42,6 +42,7 @@ print(f"{STOCK_info['fiftyTwoWeekLow']=}円")
 
 # 52週最低値
 print(f"{STOCK_info['fiftyTwoWeekHigh']=}円")
+
 
 #bs/pl/cf
 
@@ -83,3 +84,34 @@ print(f'{type(STOCK_quarterly_cashflow)=}\n{STOCK_quarterly_cashflow}')
 # csvへ出力
 STOCK_cashflow.to_csv(STOCK_info['underlyingSymbol']+"_キャッシュフロー計算書.csv")
 
+
+#TikerでAPLL指定。
+STOCK = yf.Ticker("7203") 
+
+# 配当(.dividends)==========================
+STOCK_dividends = STOCK.dividends
+print(f'{type(STOCK_dividends)=}\n{STOCK_dividends}')
+
+
+# csvへ出力
+STOCK_dividends.to_csv(STOCK_info['underlyingSymbol']+"_配当.csv")
+
+# 最大期間取得
+STOCK_download = yf.download(tickers="7203", period="max")
+print(STOCK_download)
+
+
+# 1分足
+STOCK_download = yf.download(tickers="7203", period="1d",interval="1m")
+print(STOCK_download)
+
+
+# 日付指定
+STOCK_download = yf.download(tickers="7203", start="first", end="last")
+print(STOCK_download)
+
+
+# トヨタの株価データ(history)
+STOCK = yf.Ticker("7203") 
+STOCK_history = STOCK.history(period="max", interval="3mo")
+print(STOCK_history)
